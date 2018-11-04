@@ -24,10 +24,15 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'client/ypublic')))
+app.use(express.static(path.join(__dirname, 'client/build')))
 
 app.use('/', indexRouter)
 app.use('/api/blogs', blogsRouter)
+
+// Handle React routing, return all requests to React app
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
