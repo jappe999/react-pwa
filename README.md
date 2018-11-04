@@ -2,6 +2,8 @@
 
 This is a blog build on Express with React.
 
+View it on [Heroku](https://react-pwa-blog.herokuapp.com)
+
 ## Installation
 __Server installation__
 ```yarn # Or npm install```
