@@ -5,8 +5,14 @@ export default class BlogPost extends React.Component {
   constructor (props) {
     super(props)
 
+    this.originalPost = {
+      title: '',
+      subtitle: '',
+      text: '',
+    }
+
     this.state = {
-      post: {}
+      post: this.originalPost,
     }
 
     this.createBlogPost = this.createBlogPost.bind(this)
@@ -17,6 +23,17 @@ export default class BlogPost extends React.Component {
     event.preventDefault()
     axios.post('/api/blogs', {
       ...this.state.post
+    })
+    .then(({ data }) => {
+      this.props.onCreatePost(data)
+      this.emptyForm()
+    })
+    .catch(error => console.error(error))
+  }
+
+  emptyForm () {
+    this.setState({
+      post: this.originalPost,
     })
   }
 
@@ -43,6 +60,7 @@ export default class BlogPost extends React.Component {
               className="w-full shadow mb-3 p-3 bg-grey-lightest"
               placeholder="Titel"
               required
+              value={this.state.post.title}
               onChange={this.handleInput}
             />
             <input
@@ -52,6 +70,7 @@ export default class BlogPost extends React.Component {
               className="w-full shadow mb-3 p-3 bg-grey-lightest"
               placeholder="Subtitel"
               required
+              value={this.state.post.subtitle}
               onChange={this.handleInput}
             />
             <textarea
@@ -61,6 +80,7 @@ export default class BlogPost extends React.Component {
               placeholder="Bericht"
               rows="10"
               required
+              value={this.state.post.text}
               onChange={this.handleInput}
             >
             </textarea>
