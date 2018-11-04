@@ -17,7 +17,7 @@ class Menu extends Component {
         }}
       >
         <ul className="list-reset">
-          <li className="py-4 px-6 hover:bg-black text-white">
+          <li className="py-4 px-6 hover:bg-black text-white cursor-pointer">
             Menu Item
           </li>
         </ul>

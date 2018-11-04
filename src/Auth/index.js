@@ -1,6 +1,8 @@
 import auth0 from 'auth0-js';
-import { AUTH_CONFIG } from './auth0-variables';
-import history from '../../history';
+import {
+  AUTH_CONFIG
+} from './auth0-variables.config';
+import history from '../history';
 
 export default class Auth {
   userProfile;
@@ -36,7 +38,7 @@ export default class Auth {
       } else if (err) {
         history.replace('/');
         console.log(err);
-        alert(`Error: ${err.error}. Check the console for further details.`);
+        // alert(`Error: ${err.error}. Check the console for further details.`);
       }
     });
   }
@@ -99,12 +101,12 @@ export default class Auth {
     this.auth0.checkSession({},
       (err, result) => {
         if (err) {
-          alert(
-            `Could not get a new token (${err.error}: ${err.error_description}).`
-          );
+          // alert(
+          //   `Could not get a new token (${err.error}: ${err.error_description}).`
+          // );
         } else {
           this.setSession(result);
-          alert(`Successfully renewed auth!`);
+          // alert(`Successfully renewed auth!`);
         }
       }
     );
